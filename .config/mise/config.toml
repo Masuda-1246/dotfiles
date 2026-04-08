@@ -33,13 +33,24 @@ direnv = "latest"
 fzf = "latest"
 ripgrep = "latest"
 lefthook = "latest"
+git-lfs = "latest"
 
-# ── npm CLIs (mise npm backend) ──
+# ── Proto / gRPC ──
+protoc = "latest"
+protoc-gen-go = "latest"
+protoc-gen-go-grpc = "latest"
+grpcurl = "latest"
+
+# ── SaaS CLIs ──
+stripe = "latest"
+
+# ── npm CLIs (内部で pnpm を使用) ──
 "npm:aws-cdk" = "2"
 "npm:prisma" = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
 
-# NOTE: neovim は aqua バックエンドで安定版アセットがないため Homebrew で管理
+# NOTE: neovim, tmux は Homebrew で管理 (Brewfile)
+# NOTE: yabai, skhd は Homebrew tap で管理 (Brewfile)
 # NOTE: @openai/codex は install_before フィルタとの干渉があるため pnpm -g で管理
 #   pnpm add -g @openai/codex
 
