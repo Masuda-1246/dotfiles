@@ -1,0 +1,48 @@
+[settings]
+# サプライチェーン攻撃対策: リリースから7日未満のバージョンをインストールしない
+install_before = "7d"
+# ロックファイルを有効化して再現性を確保
+lockfile = true
+# npm バックエンドの内部パッケージマネージャを pnpm に強制
+# npm:xxx のインストール時に pnpm が使われる（npm は一切使わない）
+npm.package_manager = "pnpm"
+
+[tools]
+# ── Language Runtimes ──
+node = "22"
+python = "3.12"
+go = "latest"
+deno = "latest"
+
+# ── Package Managers ──
+pnpm = "latest"
+uv = "latest"
+
+# ── DevOps / Cloud ──
+terraform = "latest"
+kubectl = "latest"
+helm = "latest"
+eksctl = "latest"
+awscli = "latest"
+supabase = "latest"
+
+# ── Dev Tools ──
+# NOTE: gh は aqua バックエンドの attestation 問題あり。mise アップデート後に再試行。
+#   現在は Homebrew 版を使用: brew install gh
+direnv = "latest"
+fzf = "latest"
+ripgrep = "latest"
+lefthook = "latest"
+
+# ── npm CLIs (mise npm backend) ──
+"npm:aws-cdk" = "2"
+"npm:prisma" = "latest"
+"npm:@anthropic-ai/claude-code" = "latest"
+
+# NOTE: neovim は aqua バックエンドで安定版アセットがないため Homebrew で管理
+# NOTE: @openai/codex は install_before フィルタとの干渉があるため pnpm -g で管理
+#   pnpm add -g @openai/codex
+
+[env]
+# mise管理のpnpmをデフォルトに
+COREPACK_ENABLE_STRICT = "0"

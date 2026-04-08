@@ -1,0 +1,35 @@
+---
+description: mise による開発環境管理ルール。ランタイム・ツール・パッケージマネージャの選択を強制する。
+alwaysApply: true
+---
+
+# mise 開発環境
+
+全てのランタイム・CLIツールは **mise** で管理する。
+
+## 必須ルール
+
+- ツール管理: `mise use`, `mise install` を使う。nvm / pyenv / conda / brew(ランタイム) は禁止。
+- Node.js: パッケージマネージャは **pnpm** のみ。**npm / npx / yarn は絶対禁止。**
+- Python: パッケージマネージャは **uv** のみ。pip / pipx 禁止。
+- ロックファイル (`pnpm-lock.yaml`, `uv.lock`) は必ずコミットする。
+
+## npm 利用の完全禁止
+
+npm はサプライチェーンリスクが高いため一切使わない。
+`npm install` → `pnpm install`, `npx` → `pnpm dlx`, `npm run` → `pnpm run`。
+mise 設定で `npm.package_manager = "pnpm"` が強制済み。変更禁止。
+
+## サプライチェーン攻撃対策（全レイヤーで7日ルール適用済み）
+
+- mise: `install_before = "7d"` — ツールバイナリ。無効化禁止。
+- mise: `npm.package_manager = "pnpm"` — npm 排除。変更禁止。
+- pnpm: `.npmrc` の `minimum-release-age=10080` — npm パッケージ。無効化禁止。
+- uv: `~/.config/uv/uv.toml` の `exclude-newer = "7 days"` — Python パッケージ。無効化禁止。
+
+## 設定ファイル
+
+- mise: `~/.config/mise/config.toml`
+- uv: `~/.config/uv/uv.toml`
+- pnpm: `~/.npmrc`
+- プロジェクト: `mise.toml`, `pyproject.toml`
