@@ -30,7 +30,7 @@ if ! command -v brew &>/dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 echo "  brew bundle..."
-brew bundle --file="$DOTFILES_DIR/Brewfile" --no-lock
+brew bundle --file="$DOTFILES_DIR/Brewfile" || echo "  [warn] 一部の brew パッケージのインストールに失敗しました（上のログを確認）"
 echo ""
 
 # ── 2. mise config ──
