@@ -3,6 +3,13 @@ export LANG=ja_JP.UTF-8
 export PATH=/opt/homebrew/bin:$PATH
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
+# ── pnpm global ──
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
 # ── mise (全てのランタイム・ツール管理はここに集約) ──
 # node, python, go, deno, pnpm, uv, terraform, kubectl, starship, etc.
 # 設定: ~/.config/mise/config.toml

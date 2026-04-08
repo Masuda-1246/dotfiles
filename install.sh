@@ -24,7 +24,7 @@ echo "=== dotfiles installer ==="
 echo ""
 
 # ── 1. Homebrew ──
-echo "[1/8] Homebrew"
+echo "[1/10] Homebrew"
 if ! command -v brew &>/dev/null; then
   echo "  Homebrew をインストール中..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -34,27 +34,27 @@ brew bundle --file="$DOTFILES_DIR/Brewfile" || echo "  [warn] 一部の brew パ
 echo ""
 
 # ── 2. mise config ──
-echo "[2/8] mise config"
+echo "[2/10] mise config"
 backup_and_link "$DOTFILES_DIR/.config/mise/config.toml" "$HOME/.config/mise/config.toml"
 
 # ── 3. uv config ──
-echo "[3/8] uv config"
+echo "[3/10] uv config"
 backup_and_link "$DOTFILES_DIR/.config/uv/uv.toml" "$HOME/.config/uv/uv.toml"
 
 # ── 4. starship config ──
-echo "[4/8] starship config"
+echo "[4/10] starship config"
 backup_and_link "$DOTFILES_DIR/.config/starship/starship.toml" "$HOME/.config/starship/starship.toml"
 
 # ── 5. .npmrc ──
-echo "[5/8] .npmrc"
+echo "[5/10] .npmrc"
 backup_and_link "$DOTFILES_DIR/.npmrc" "$HOME/.npmrc"
 
 # ── 6. .zshrc ──
-echo "[6/8] .zshrc"
+echo "[6/10] .zshrc"
 backup_and_link "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 
 # ── 7. yabai + skhd ──
-echo "[7/8] yabai + skhd"
+echo "[7/10] yabai + skhd"
 backup_and_link "$DOTFILES_DIR/.yabairc" "$HOME/.yabairc"
 backup_and_link "$DOTFILES_DIR/.skhdrc" "$HOME/.skhdrc"
 
@@ -63,8 +63,24 @@ yabai --start-service 2>/dev/null || true
 skhd --start-service 2>/dev/null || true
 echo ""
 
-# ── 8. mise tools ──
-echo "[8/8] mise tools をインストール中..."
+# ── 8. Claude Code ──
+echo "[8/10] Claude Code"
+backup_and_link "$DOTFILES_DIR/.claude/settings.json" "$HOME/.claude/settings.json"
+backup_and_link "$DOTFILES_DIR/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+
+# ── 9. Codex CLI ──
+echo "[9/10] Codex CLI"
+backup_and_link "$DOTFILES_DIR/.codex/config.toml" "$HOME/.codex/config.toml"
+backup_and_link "$DOTFILES_DIR/.codex/instructions.md" "$HOME/.codex/instructions.md"
+
+echo "  pnpm global に @openai/codex をインストール..."
+export PNPM_HOME="$HOME/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+pnpm add -g @openai/codex 2>/dev/null || echo "  [warn] codex のインストールに失敗（pnpm setup が必要かも）"
+echo ""
+
+# ── 10. mise tools ──
+echo "[10/10] mise tools をインストール中..."
 mise install --yes
 
 echo ""
