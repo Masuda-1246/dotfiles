@@ -1,8 +1,11 @@
 ---
-description: コミット・push 依頼時は git-commit-workflow スキルの手順に従う
+description: Git コミット・push は作業完了後にまとめて行う（git-commit-workflow）
 alwaysApply: true
 ---
 
-# Git 反映
+# Git 反映のタイミング
 
-ユーザーがこのリポジトリに対して **コミット** や **push**、変更の **Git 反映** を依頼したら、プロジェクトスキル **git-commit-workflow**（`.cursor/skills/git-commit-workflow/SKILL.md`）の手順に従う。調査・ステージ・メッセージ・コミットをエージェントが実行する。push はユーザーが明示した場合のみ。
+- **コミット・push は、依頼した作業がすべて終わったあとにまとめて行う。** 途中のファイル編集直後にはコミットしない。
+- 手順の詳細はプロジェクトスキル **git-commit-workflow**（`.cursor/skills/git-commit-workflow/SKILL.md`）に従う。
+- ユーザーが「今すぐコミット」など途中コミットを明示した場合のみ例外。
+- push はユーザーが明示したときのみ。
