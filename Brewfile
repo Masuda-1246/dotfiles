@@ -36,6 +36,8 @@ brew "curl"
 brew "telnet"
 
 # ── System Utilities ──
+# GNU make — Xcode / CLT の make に依存しない（.zshrc で gnubin を PATH 先頭に）
+brew "make"
 brew "coreutils"
 brew "grep"
 brew "tree"

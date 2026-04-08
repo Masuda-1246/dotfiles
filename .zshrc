@@ -1,6 +1,14 @@
 # ── 環境変数 ──
 export LANG=ja_JP.UTF-8
 export PATH=/opt/homebrew/bin:$PATH
+
+# GNU make (brew) — `make` が Xcode の xcodebuild 経由にならないようにする
+if [[ -d /opt/homebrew/opt/make/libexec/gnubin ]]; then
+  export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
+elif [[ -d /usr/local/opt/make/libexec/gnubin ]]; then
+  export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+fi
+
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 # ── pnpm global ──
