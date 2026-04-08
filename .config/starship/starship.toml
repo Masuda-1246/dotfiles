@@ -5,7 +5,7 @@ $directory\
 $git_branch\
 $git_status\
 $fill\
-$node\
+$nodejs\
 $python\
 $golang\
 $deno\
@@ -47,7 +47,7 @@ min_time = 3_000
 style = "bold yellow"
 format = "[$duration]($style) "
 
-[node]
+[nodejs]
 symbol = " "
 format = "[$symbol$version]($style) "
 
