@@ -20,6 +20,8 @@ brew "tmux"
 # ── Shell ──
 brew "zsh"
 brew "zsh-completions"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
 
 # ── Git ──
 brew "git-lfs"

@@ -29,6 +29,7 @@ supabase = "latest"
 # ── Dev Tools ──
 # NOTE: gh は aqua バックエンドの attestation 問題あり。mise アップデート後に再試行。
 #   現在は Homebrew 版を使用: brew install gh
+starship = "latest"
 direnv = "latest"
 fzf = "latest"
 ripgrep = "latest"
