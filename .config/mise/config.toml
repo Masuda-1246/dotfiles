@@ -57,3 +57,41 @@ stripe = "latest"
 [env]
 # mise管理のpnpmをデフォルトに
 COREPACK_ENABLE_STRICT = "0"
+
+# ── Window Manager (yabai + skhd) ──
+
+[tasks."wm:start"]
+description = "yabai + skhd を起動"
+run = ["yabai --start-service", "skhd --start-service"]
+
+[tasks."wm:stop"]
+description = "yabai + skhd を停止"
+run = ["yabai --stop-service", "skhd --stop-service"]
+
+[tasks."wm:restart"]
+description = "yabai + skhd を再起動"
+run = ["yabai --restart-service", "skhd --restart-service"]
+
+[tasks."yabai:start"]
+description = "yabai を起動"
+run = "yabai --start-service"
+
+[tasks."yabai:stop"]
+description = "yabai を停止"
+run = "yabai --stop-service"
+
+[tasks."yabai:restart"]
+description = "yabai を再起動"
+run = "yabai --restart-service"
+
+[tasks."skhd:start"]
+description = "skhd を起動"
+run = "skhd --start-service"
+
+[tasks."skhd:stop"]
+description = "skhd を停止"
+run = "skhd --stop-service"
+
+[tasks."skhd:restart"]
+description = "skhd を再起動"
+run = "skhd --restart-service"
