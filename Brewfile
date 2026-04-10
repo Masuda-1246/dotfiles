@@ -6,13 +6,6 @@
 # Python CLIs は uv tool で管理
 # ============================================================
 
-# ── Taps ──
-tap "koekeishiya/formulae"
-
-# ── macOS Window Management ──
-brew "yabai"
-brew "skhd"
-
 # ── Editor ──
 brew "neovim"
 brew "tmux"

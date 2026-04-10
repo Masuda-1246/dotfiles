@@ -35,6 +35,8 @@ fzf = "latest"
 ripgrep = "latest"
 lefthook = "latest"
 git-lfs = "latest"
+# ターミナル系リソースモニタ — https://github.com/xxxserxxx/gotop
+"go:github.com/xxxserxxx/gotop/v4/cmd/gotop" = "latest"
 
 # ── Proto / gRPC ──
 protoc = "latest"
@@ -51,48 +53,9 @@ stripe = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
 
 # NOTE: neovim, tmux は Homebrew で管理 (Brewfile)
-# NOTE: yabai, skhd は Homebrew tap で管理 (Brewfile)
 # NOTE: @openai/codex は install_before フィルタとの干渉があるため pnpm -g で管理
 #   pnpm add -g @openai/codex
 
 [env]
 # mise管理のpnpmをデフォルトに
 COREPACK_ENABLE_STRICT = "0"
-
-# ── Window Manager (yabai + skhd) ──
-
-[tasks."wm:start"]
-description = "yabai + skhd を起動"
-run = ["yabai --start-service", "skhd --start-service"]
-
-[tasks."wm:stop"]
-description = "yabai + skhd を停止"
-run = ["yabai --stop-service", "skhd --stop-service"]
-
-[tasks."wm:restart"]
-description = "yabai + skhd を再起動"
-run = ["yabai --restart-service", "skhd --restart-service"]
-
-[tasks."yabai:start"]
-description = "yabai を起動"
-run = "yabai --start-service"
-
-[tasks."yabai:stop"]
-description = "yabai を停止"
-run = "yabai --stop-service"
-
-[tasks."yabai:restart"]
-description = "yabai を再起動"
-run = "yabai --restart-service"
-
-[tasks."skhd:start"]
-description = "skhd を起動"
-run = "skhd --start-service"
-
-[tasks."skhd:stop"]
-description = "skhd を停止"
-run = "skhd --stop-service"
-
-[tasks."skhd:restart"]
-description = "skhd を再起動"
-run = "skhd --restart-service"
