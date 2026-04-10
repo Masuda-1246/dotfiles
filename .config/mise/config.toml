@@ -37,6 +37,8 @@ lefthook = "latest"
 git-lfs = "latest"
 # ターミナル系リソースモニタ — https://github.com/xxxserxxx/gotop
 "go:github.com/xxxserxxx/gotop/v4/cmd/gotop" = "latest"
+# コンソールファイルマネージャ（VI キー）— https://ranger.fm/
+"pipx:ranger-fm" = "latest"
 
 # ── Proto / gRPC ──
 protoc = "latest"
