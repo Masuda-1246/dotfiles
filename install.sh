@@ -24,7 +24,7 @@ echo "=== dotfiles installer ==="
 echo ""
 
 # ── 1. Homebrew ──
-echo "[1/9] Homebrew"
+echo "[1/10] Homebrew"
 if ! command -v brew &>/dev/null; then
   echo "  Homebrew をインストール中..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -34,32 +34,36 @@ brew bundle --file="$DOTFILES_DIR/Brewfile" || echo "  [warn] 一部の brew パ
 echo ""
 
 # ── 2. mise config ──
-echo "[2/9] mise config"
+echo "[2/10] mise config"
 backup_and_link "$DOTFILES_DIR/.config/mise/config.toml" "$HOME/.config/mise/config.toml"
 
 # ── 3. uv config ──
-echo "[3/9] uv config"
+echo "[3/10] uv config"
 backup_and_link "$DOTFILES_DIR/.config/uv/uv.toml" "$HOME/.config/uv/uv.toml"
 
 # ── 4. starship config ──
-echo "[4/9] starship config"
+echo "[4/10] starship config"
 backup_and_link "$DOTFILES_DIR/.config/starship/starship.toml" "$HOME/.config/starship/starship.toml"
 
-# ── 5. .npmrc ──
-echo "[5/9] .npmrc"
+# ── 5. sheldon (zsh plugin manager) config ──
+echo "[5/10] sheldon config"
+backup_and_link "$DOTFILES_DIR/.config/sheldon/plugins.toml" "$HOME/.config/sheldon/plugins.toml"
+
+# ── 6. .npmrc ──
+echo "[6/10] .npmrc"
 backup_and_link "$DOTFILES_DIR/.npmrc" "$HOME/.npmrc"
 
-# ── 6. .zshrc ──
-echo "[6/9] .zshrc"
+# ── 7. .zshrc ──
+echo "[7/10] .zshrc"
 backup_and_link "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 
-# ── 7. Claude Code ──
-echo "[7/9] Claude Code"
+# ── 8. Claude Code ──
+echo "[8/10] Claude Code"
 backup_and_link "$DOTFILES_DIR/.claude/settings.json" "$HOME/.claude/settings.json"
 backup_and_link "$DOTFILES_DIR/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
-# ── 8. Codex CLI ──
-echo "[8/9] Codex CLI"
+# ── 9. Codex CLI ──
+echo "[9/10] Codex CLI"
 backup_and_link "$DOTFILES_DIR/.codex/config.toml" "$HOME/.codex/config.toml"
 backup_and_link "$DOTFILES_DIR/.codex/instructions.md" "$HOME/.codex/instructions.md"
 
@@ -69,8 +73,8 @@ export PATH="$PNPM_HOME:$PATH"
 pnpm add -g @openai/codex 2>/dev/null || echo "  [warn] codex のインストールに失敗（pnpm setup が必要かも）"
 echo ""
 
-# ── 9. mise tools ──
-echo "[9/9] mise tools をインストール中..."
+# ── 10. mise tools ──
+echo "[10/10] mise tools をインストール中..."
 mise install --yes
 
 echo ""

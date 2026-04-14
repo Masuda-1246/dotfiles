@@ -29,6 +29,8 @@ supabase = "latest"
 # ── Dev Tools ──
 # NOTE: gh は aqua バックエンドの attestation 問題あり。mise アップデート後に再試行。
 #   現在は Homebrew 版を使用: brew install gh
+# zsh プラグインマネージャ — zsh-autosuggestions 等を管理
+"github:rossmacarthur/sheldon" = "latest"
 starship = "latest"
 direnv = "latest"
 fzf = "latest"
@@ -57,7 +59,10 @@ stripe = "latest"
 # NOTE: neovim, tmux は Homebrew で管理 (Brewfile)
 # NOTE: @openai/codex は install_before フィルタとの干渉があるため pnpm -g で管理
 #   pnpm add -g @openai/codex
+# 
+"github:PKSHATechnology/ars-skilltree" = "latest"
 
 [env]
 # mise管理のpnpmをデフォルトに
 COREPACK_ENABLE_STRICT = "0"
+MISE_GITHUB_TOKEN = { value = "{{ exec(command='gh auth token 2>/dev/null || true') }}", tools = true }
