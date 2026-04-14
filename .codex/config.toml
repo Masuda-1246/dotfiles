@@ -6,3 +6,7 @@ multi_agent = true
 
 [plugins."github@openai-curated"]
 enabled = true
+
+[mcp_servers.pencil]
+command = "/Users/masudaharukasuke/.pencil/mcp/cursor/out/mcp-server-darwin-arm64"
+args = [ "--app", "cursor" ]
