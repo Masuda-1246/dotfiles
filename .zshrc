@@ -30,8 +30,21 @@ eval "$(mise exec direnv -- direnv hook zsh)"
 eval "$(starship init zsh)"
 
 # ── Zsh Plugins (Homebrew) ──
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+# Apple Silicon (/opt/homebrew) と Intel Mac (/usr/local)、Linuxbrew など prefix が異なる。
+# 存在しないパスを source しても 2>/dev/null で握りつぶすと「効かない」原因が分かりにくい。
+_zsh_share=""
+if command -v brew >/dev/null 2>&1; then
+  _zsh_share="$(brew --prefix)/share"
+elif [[ -d /opt/homebrew/share ]]; then
+  _zsh_share=/opt/homebrew/share
+elif [[ -d /usr/local/share ]]; then
+  _zsh_share=/usr/local/share
+fi
+if [[ -n $_zsh_share ]]; then
+  [[ -r "$_zsh_share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source "$_zsh_share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  [[ -r "$_zsh_share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && source "$_zsh_share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+unset _zsh_share
 
 # ── Git ──
 function gitmain() {
