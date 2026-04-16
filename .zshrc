@@ -18,13 +18,23 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-# ── mise (全てのランタイム・ツール管理はここに集約) ──
-# node, python, go, deno, pnpm, uv, terraform, kubectl, starship, etc.
-# 設定: ~/.config/mise/config.toml
-eval "$(mise activate zsh)"
+# ── MISE_GITHUB_TOKEN (ファイルキャッシュ / 1時間有効) ──
+_gh_cache="$HOME/.cache/mise/gh-token"
+if [[ -f "$_gh_cache" ]] && (( $(date +%s) - $(stat -f %m "$_gh_cache") < 3600 )); then
+  export MISE_GITHUB_TOKEN="$(<$_gh_cache)"
+else
+  export MISE_GITHUB_TOKEN="$(gh auth token 2>/dev/null || true)"
+  [[ -n "$MISE_GITHUB_TOKEN" ]] && { mkdir -p "${_gh_cache:h}"; echo "$MISE_GITHUB_TOKEN" > "$_gh_cache"; }
+fi
+unset _gh_cache
 
-# mise管理のdirenvを有効化
-eval "$(mise exec direnv -- direnv hook zsh)"
+# ── mise (全てのランタイム・ツール管理はここに集約) ──
+# --shims: precmd hook の代わりに shim PATH を使い起動を高速化
+# 設定: ~/.config/mise/config.toml
+eval "$(mise activate zsh --shims)"
+
+# direnv — shim 経由で直接呼び出し (mise exec ラッパー不要)
+eval "$(direnv hook zsh)"
 
 # ── Starship prompt ──
 eval "$(starship init zsh)"
@@ -43,6 +53,13 @@ function gitmain() {
 function gitsub() {
   git config --global user.name "manamu1217"
   git config --global user.email "nagisa_nasu@manamu.jp"
+}
+
+# ── AWS (awsume) ──
+# awsume はカレントシェルの AWS 環境変数を書き換えるため source 経由で実行する
+unalias awsume 2>/dev/null
+function awsume() {
+  source "$(mise which awsume)" "$@"
 }
 
 # ── Aliases ──
@@ -70,3 +87,6 @@ SAVEHIST=10000
 
 # ── LM Studio CLI ──
 export PATH="$PATH:$HOME/.lmstudio/bin"
+
+# Hermes Agent — ensure ~/.local/bin is on PATH
+export PATH="$HOME/.local/bin:$PATH"
