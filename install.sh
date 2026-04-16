@@ -24,7 +24,7 @@ echo "=== dotfiles installer ==="
 echo ""
 
 # ── 1. Homebrew ──
-echo "[1/10] Homebrew"
+echo "[1/12] Homebrew"
 if ! command -v brew &>/dev/null; then
   echo "  Homebrew をインストール中..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -34,36 +34,40 @@ brew bundle --file="$DOTFILES_DIR/Brewfile" || echo "  [warn] 一部の brew パ
 echo ""
 
 # ── 2. mise config ──
-echo "[2/10] mise config"
+echo "[2/12] mise config"
 backup_and_link "$DOTFILES_DIR/.config/mise/config.toml" "$HOME/.config/mise/config.toml"
 
 # ── 3. uv config ──
-echo "[3/10] uv config"
+echo "[3/12] uv config"
 backup_and_link "$DOTFILES_DIR/.config/uv/uv.toml" "$HOME/.config/uv/uv.toml"
 
 # ── 4. starship config ──
-echo "[4/10] starship config"
+echo "[4/12] starship config"
 backup_and_link "$DOTFILES_DIR/.config/starship/starship.toml" "$HOME/.config/starship/starship.toml"
 
 # ── 5. sheldon (zsh plugin manager) config ──
-echo "[5/10] sheldon config"
+echo "[5/12] sheldon config"
 backup_and_link "$DOTFILES_DIR/.config/sheldon/plugins.toml" "$HOME/.config/sheldon/plugins.toml"
 
 # ── 6. .npmrc ──
-echo "[6/10] .npmrc"
+echo "[6/12] .npmrc"
 backup_and_link "$DOTFILES_DIR/.npmrc" "$HOME/.npmrc"
 
-# ── 7. .zshrc ──
-echo "[7/10] .zshrc"
+# ── 7. bunfig.toml ──
+echo "[7/12] bunfig.toml"
+backup_and_link "$DOTFILES_DIR/.config/bun/bunfig.toml" "$HOME/.config/bun/bunfig.toml"
+
+# ── 8. .zshrc ──
+echo "[8/12] .zshrc"
 backup_and_link "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 
-# ── 8. Claude Code ──
-echo "[8/10] Claude Code"
+# ── 9. Claude Code ──
+echo "[9/12] Claude Code"
 backup_and_link "$DOTFILES_DIR/.claude/settings.json" "$HOME/.claude/settings.json"
 backup_and_link "$DOTFILES_DIR/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
-# ── 9. Codex CLI ──
-echo "[9/10] Codex CLI"
+# ── 10. Codex CLI ──
+echo "[10/12] Codex CLI"
 backup_and_link "$DOTFILES_DIR/.codex/config.toml" "$HOME/.codex/config.toml"
 backup_and_link "$DOTFILES_DIR/.codex/instructions.md" "$HOME/.codex/instructions.md"
 
@@ -73,9 +77,18 @@ export PATH="$PNPM_HOME:$PATH"
 pnpm add -g @openai/codex 2>/dev/null || echo "  [warn] codex のインストールに失敗（pnpm setup が必要かも）"
 echo ""
 
-# ── 10. mise tools ──
-echo "[10/10] mise tools をインストール中..."
+# ── 11. mise tools ──
+echo "[11/12] mise tools をインストール中..."
 mise install --yes
+
+# ── 12. awsume autocomplete ──
+echo "[12/12] awsume autocomplete"
+if command -v awsume-autocomplete &>/dev/null; then
+  mkdir -p "$HOME/.awsume/zsh-autocomplete"
+  echo "  awsume autocomplete を設定済み"
+else
+  echo "  [skip] awsume-autocomplete が見つかりません（mise install 後に再実行してください）"
+fi
 
 echo ""
 echo "=== 完了 ==="
