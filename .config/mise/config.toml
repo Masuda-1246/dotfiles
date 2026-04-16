@@ -13,6 +13,7 @@ node = "22"
 python = "3.12"
 go = "latest"
 deno = "latest"
+bun = "latest"
 
 # ── Package Managers ──
 pnpm = "latest"
@@ -24,6 +25,7 @@ kubectl = "latest"
 helm = "latest"
 eksctl = "latest"
 awscli = "latest"
+"pipx:awsume" = "latest"
 supabase = "latest"
 
 # ── Dev Tools ──
@@ -61,8 +63,11 @@ stripe = "latest"
 #   pnpm add -g @openai/codex
 # 
 "github:PKSHATechnology/ars-skilltree" = "latest"
+# Cursor Agent CLI — https://cursor.com/cli （公式と同じ lab 配布物）
+# 更新時: `curl -fsSL https://cursor.com/install | rg DOWNLOAD_URL` のバージョンを version と揃える
+"http:cursor-agent" = { version = "2026.04.15-dccdccd", url = 'https://downloads.cursor.com/lab/{{ version }}/{{os(macos="darwin")}}/{{arch()}}/agent-cli-package.tar.gz', strip_components = 1 }
 
 [env]
 # mise管理のpnpmをデフォルトに
 COREPACK_ENABLE_STRICT = "0"
-MISE_GITHUB_TOKEN = { value = "{{ exec(command='gh auth token 2>/dev/null || true') }}", tools = true }
+# MISE_GITHUB_TOKEN は .zshrc で1回だけ取得・キャッシュ (exec() は毎回2秒かかるため移動)
