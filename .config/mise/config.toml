@@ -66,6 +66,7 @@ stripe = "latest"
 # Cursor Agent CLI — https://cursor.com/cli （公式と同じ lab 配布物）
 # 更新時: `curl -fsSL https://cursor.com/install | rg DOWNLOAD_URL` のバージョンを version と揃える
 "http:cursor-agent" = { version = "2026.04.15-dccdccd", url = 'https://downloads.cursor.com/lab/{{ version }}/{{os(macos="darwin")}}/{{arch()}}/agent-cli-package.tar.gz', strip_components = 1 }
+"npm:@openai/codex" = "latest"
 
 [env]
 # mise管理のpnpmをデフォルトに

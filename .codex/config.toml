@@ -1,5 +1,6 @@
 model = "gpt-5.4"
 model_reasoning_effort = "low"
+check_for_update_on_startup = false
 
 [features]
 multi_agent = true
@@ -12,6 +13,9 @@ command = "/Users/masuda/.pencil/mcp/cursor/out/mcp-server-darwin-arm64"
 args = [ "--app", "cursor" ]
 
 [projects."/Users/masuda/works"]
+trust_level = "trusted"
+
+[projects."/Users/masuda/works/personal/agent-communitaions"]
 trust_level = "trusted"
 
 [notice.model_migrations]

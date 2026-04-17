@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "mcp__pencil"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "hooks": {
     "UserPromptSubmit": [
@@ -59,5 +60,6 @@
       }
     ]
   },
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "skipAutoPermissionPrompt": true
 }
